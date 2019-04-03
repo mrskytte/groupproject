@@ -10,7 +10,7 @@ function startGame() {
     //    Create Spaceship
     mySpaceShip = new component(30, 10, "yellow", 10, 400);
     //    Create Astroid
-    myAstroid = new component(50, 50, "red", 500, 400);
+    myAstroid = new component(50, 50, "red", 1000, 400);
 }
 const main = document.querySelector("#main");
 
@@ -34,6 +34,9 @@ var myGameArea = {
 
     clear: function () {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height)
+    },
+    stop: function () {
+        clearInterval(this.interval);
     }
 }
 
@@ -54,41 +57,60 @@ function component(width, height, color, x, y) {
         this.x += this.speedX;
         this.y += this.speedY
     }
+    this.crashWith = function (otherObj) {
+        var shipLeft = this.x;
+        var shipRight = this.x + (this.width);
+        var shipTop = this.y;
+        var shipBtm = this.y + (this.height);
+        var astroidLeft = otherObj.x;
+        var astroidRight = otherObj.x + (otherObj.width);
+        var astroidTop = otherObj.y;
+        var astroidBtm = otherObj.y + (otherObj.height);
+        var crash = true;
+        if (shipLeft > astroidRight || shipRight < astroidLeft || shipTop > astroidBtm || shipBtm < astroidTop) {
+            crash = false;
+        }
+        return crash
+    }
 }
 
 
 //Makes the Game Run (by deleting and adding frames)
 function updateGameArea() {
-    myGameArea.clear();
-    myAstroid.update();
-    mySpaceShip.newPos();
-    mySpaceShip.update();
-    mySpaceShip.speedX = 0;
-    mySpaceShip.speedY = 0;
+    if (mySpaceShip.crashWith(myAstroid)) {
+        myGameArea.stop();
+    } else {
+        myGameArea.clear();
+        myAstroid.update();
+        mySpaceShip.newPos();
+        mySpaceShip.update();
+        mySpaceShip.speedX = 0;
+        mySpaceShip.speedY = 0;
 
 
 
-    //Functions that determines movement speed (number) and direction (Y or X)
+        //Functions that determines movement speed (number) and direction (Y or X)
 
-    //    UP
-    if (myGameArea.keys && myGameArea.keys[38]) {
-        mySpaceShip.speedY -= 2;
+        //    UP
+        if (myGameArea.keys && myGameArea.keys[38]) {
+            mySpaceShip.speedY -= 2;
+        }
+
+        //    DOWN
+        if (myGameArea.keys && myGameArea.keys[40]) {
+            mySpaceShip.speedY += 2;
+        }
+
+        //Untag if we need left and right movement*
+
+        //    LEFT
+        if (myGameArea.keys && myGameArea.keys[37]) {
+            mySpaceShip.speedX -= 2;
+        }
+        //    RIGHT
+        if (myGameArea.keys && myGameArea.keys[39]) {
+            mySpaceShip.speedX += 2;
+        }
+
     }
-
-    //    DOWN
-    if (myGameArea.keys && myGameArea.keys[40]) {
-        mySpaceShip.speedY += 2;
-    }
-
-    //Untag if we need left and right movement*
-
-    //    LEFT
-    if (myGameArea.keys && myGameArea.keys[37]) {
-        mySpaceShip.speedX -= 2;
-    }
-    //    RIGHT
-    if (myGameArea.keys && myGameArea.keys[39]) {
-        mySpaceShip.speedX += 2;
-    }
-
 }
