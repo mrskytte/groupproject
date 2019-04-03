@@ -91,13 +91,61 @@ function updateGameArea() {
 
     myGameArea.clear();
     myGameArea.frameNo += 1;
-
-    if (myGameArea.frameNo == 1 || everyInterval(150)) {
+    if (myGameArea.frameNo == 1 || everyInterval(400)) {
         x = myGameArea.canvas.width;
-        y = myGameArea.canvas.height - 200;
-        myAstroid.push(new component(20, 20, "red", x, y));
-        console.log("component")
+        minDimension1 = 20;
+        maxDimension1 = 200;
+        minDimension3 = 50;
+        maxDimension3 = 300;
+
+        dimension1 = Math.floor(Math.random() * (maxDimension1 - minDimension1 + 1) + minDimension1);
+
+        dimension3 = Math.floor(Math.random() * (maxDimension3 - minDimension3 + 1) + minDimension3);
+        minGap = 50;
+        maxGap = 800;
+        gap1 = Math.floor(Math.random() * (maxGap - minGap + 1) + minGap);
+
+        gap3 = Math.floor(Math.random() * (maxGap - minGap + 1) + minGap);
+        myAstroid.push(new component(dimension1, dimension1, "green", x, gap1));
+        myAstroid.push(new component(dimension3, dimension3, "green", x, gap3));
     }
+     if (myGameArea.frameNo == 1 || everyInterval(150)) {
+        x = myGameArea.canvas.width;
+
+        minDimension2 = 10;
+        maxDimension2 = 150;
+
+        dimension2 = Math.floor(Math.random() * (maxDimension2 - minDimension2 + 1) + minDimension2);
+
+        minGap = 50;
+        maxGap = 800;
+
+        gap2 = Math.floor(Math.random() * (maxGap - minGap + 1) + minGap);
+
+        myAstroid.push(new component(dimension2, dimension2, "green", x, gap2));
+    }
+    if (myGameArea.frameNo == 1 || everyInterval(600)) {
+        x = myGameArea.canvas.width;
+
+        minDimension3 = 50;
+        maxDimension3 = 300;
+
+        dimension3 = Math.floor(Math.random() * (maxDimension3 - minDimension3 + 1) + minDimension3);
+
+        minGap = 50;
+        maxGap = 800;
+
+        gap3 = Math.floor(Math.random() * (maxGap - minGap + 1) + minGap);
+
+        myAstroid.push(new component(dimension3, dimension3, "green", x, gap3));
+    }
+//
+////    if (myGameArea.frameNo == 1 || everyInterval(150)) {
+////        x = myGameArea.canvas.width;
+////        y = myGameArea.canvas.height - 200;
+////        myAstroid.push(new component(20, 20, "red", x, y));
+////        console.log("component")
+//    }
     for (i = 0; i < myAstroid.length; i += 1) {
         myAstroid[i].x -= 1;
         myAstroid[i].update();
@@ -134,6 +182,7 @@ function updateGameArea() {
     }
 
 }
+
 function everyInterval(n) {
     if ((myGameArea.frameNo / n) % 1 == 0) {
         return true;
