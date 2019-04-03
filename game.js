@@ -52,6 +52,7 @@ function component(width, height, color, x, y, type) {
     this.height = height;
     this.speedX = 0;
     this.speedY = 0;
+    this.gravity = 0.5;
     this.x = x;
     this.y = y;
     this.update = function () {
@@ -66,8 +67,23 @@ function component(width, height, color, x, y, type) {
         }
     }
     this.newPos = function () {
-        this.x += this.speedX;
-        this.y += this.speedY
+        this.x += this.speedX -= this.gravity;
+        this.y += this.speedY;
+        this.hitSides ();
+    }
+    this.hitSides = function() {
+        if (this.x < 0) {
+            this.x = 0;
+        }
+        if (this.x > myGameArea.canvas.width - this.width){
+            this.x = myGameArea.canvas.width - this.width;
+        }
+        if (this.y > myGameArea.canvas.height - this.height){
+            this.y = myGameArea.canvas.height - this.height;
+        }
+        if (this.y < 50) {
+            this.y = 50;
+        }
     }
     this.crashWith = function (otherObj) {
         var shipLeft = this.x;
@@ -179,9 +195,10 @@ function updateGameArea() {
     if (myGameArea.keys && myGameArea.keys[37]) {
         mySpaceShip.speedX -= 2;
     }
+
     //    RIGHT
     if (myGameArea.keys && myGameArea.keys[39]) {
-        mySpaceShip.speedX += 2;
+        mySpaceShip.speedX += (5 + mySpaceShip.gravity);
     }
 
 }
