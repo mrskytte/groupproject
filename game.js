@@ -50,6 +50,7 @@ function component(width, height, color, x, y, type) {
     this.type = type;
     this.width = width;
     this.height = height;
+    this.angle = 0;
     this.speedX = 0;
     this.speedY = 0;
     this.gravity = 0.5;
@@ -62,29 +63,36 @@ function component(width, height, color, x, y, type) {
             ctx.fillStyle = color;
             ctx.fillText(this.text, this.x, this.y);
         } else {
+            ctx.save();
+            ctx.translate(this.x, this.y);
+            ctx.rotate(this.angle);
             ctx.fillStyle = color;
-            ctx.fillRect(this.x, this.y, this.width, this.height);
+            ctx.fillRect(this.width / -2, this.height / -2, this.width, this.height);
+            ctx.restore();
         }
     }
     this.newPos = function () {
         this.x += this.speedX -= this.gravity;
         this.y += this.speedY;
-        this.hitSides ();
+        this.hitSides();
     }
-    this.hitSides = function() {
+    // Adds solid walls to the canvas so that the spaceship can't leave the screen
+    this.hitSides = function () {
         if (this.x < 0) {
             this.x = 0;
         }
-        if (this.x > myGameArea.canvas.width - this.width){
+        if (this.x > myGameArea.canvas.width - this.width) {
             this.x = myGameArea.canvas.width - this.width;
         }
-        if (this.y > myGameArea.canvas.height - this.height){
+        if (this.y > myGameArea.canvas.height - this.height) {
             this.y = myGameArea.canvas.height - this.height;
         }
         if (this.y < 50) {
             this.y = 50;
         }
     }
+
+    // Adds a crash function when to objects collide
     this.crashWith = function (otherObj) {
         var shipLeft = this.x;
         var shipRight = this.x + (this.width);
@@ -164,6 +172,7 @@ function updateGameArea() {
 
     for (i = 0; i < myAstroid.length; i += 1) {
         myAstroid[i].x -= 1;
+        myAstroid[i].angle += 1 * Math.PI /180;
         myAstroid[i].update();
         console.log("got number 2")
     }
@@ -198,7 +207,7 @@ function updateGameArea() {
 
     //    RIGHT
     if (myGameArea.keys && myGameArea.keys[39]) {
-        mySpaceShip.speedX += (5 + mySpaceShip.gravity);
+        mySpaceShip.speedX += (2 + mySpaceShip.gravity);
     }
 
 }
