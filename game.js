@@ -11,7 +11,7 @@ function startGame() {
     //    Create Spaceship
     mySpaceShip = new component(30, 10, "yellow", 10, 400);
     //    Distance Traveled (Score)
-    myDistance = new component("25px", "Consolas", "white", 1160, 40, "text")
+    myDistance = new component("25px", "Consolas", "white", 1280 * 0.60, 40, "text")
 }
 
 const main = document.querySelector("#main");
@@ -20,8 +20,8 @@ const main = document.querySelector("#main");
 var myGameArea = {
     canvas: document.createElement("canvas"),
     start: function () {
-        this.canvas.width = 1490;
-        this.canvas.height = 800;
+        this.canvas.width = 1280 * 0.75;
+        this.canvas.height = 1024 * 0.75;
         this.context = this.canvas.getContext("2d");
         main.insertBefore(this.canvas, main.childNodes[0]);
         this.frameNo = 0;
@@ -63,12 +63,14 @@ function component(width, height, color, x, y, type) {
             ctx.fillStyle = color;
             ctx.fillText(this.text, this.x, this.y);
         } else {
-            ctx.save();
-            ctx.translate(this.x, this.y);
-            ctx.rotate(this.angle);
             ctx.fillStyle = color;
-            ctx.fillRect(this.width / -2, this.height / -2, this.width, this.height);
-            ctx.restore();
+            ctx.fillRect(this.x, this.y, this.width, this.height);
+            //            ctx.save();
+            //            ctx.translate(this.x, this.y);
+            //            ctx.rotate(this.angle);
+            //            ctx.fillStyle = color;
+            //            ctx.fillRect(this.width / -2, this.height / -2, this.width, this.height);
+            //            ctx.restore();
         }
     }
     this.newPos = function () {
@@ -119,60 +121,203 @@ function updateGameArea() {
         if (mySpaceShip.crashWith(myAstroid[i])) {
             myGameArea.stop();
             return;
-            console.log("for number 1")
         }
     }
 
     myGameArea.clear();
     myGameArea.frameNo += 1;
-    if (myGameArea.frameNo == 1 || everyInterval(400)) {
-        x = myGameArea.canvas.width;
-        minDimension1 = 20;
-        maxDimension1 = 200;
+//    Generates new astroids for three different frameNo
+    if (myGameArea.frameNo < 300) {
+        if (myGameArea.frameNo == 1 || everyInterval(400)) {
+            x = myGameArea.canvas.width;
+            minDimension1 = 20;
+            maxDimension1 = 200;
 
-        dimension1 = Math.floor(Math.random() * (maxDimension1 - minDimension1 + 1) + minDimension1);
+            dimension1 = Math.floor(Math.random() * (maxDimension1 - minDimension1 + 1) + minDimension1);
 
-        minGap = 50;
-        maxGap = 800;
-        gap1 = Math.floor(Math.random() * (maxGap - minGap + 1) + minGap);
+            minGap = 50;
+            maxGap = 800;
+            gap1 = Math.floor(Math.random() * (maxGap - minGap + 1) + minGap);
 
-        myAstroid.push(new component(dimension1, dimension1, "green", x, gap1));
+            myAstroid.push(new component(dimension1, dimension1, "green", x, gap1));
 
-    }
-    if (myGameArea.frameNo == 1 || everyInterval(150)) {
-        x = myGameArea.canvas.width;
+        }
+        if (myGameArea.frameNo == 1 || everyInterval(150)) {
+            x = myGameArea.canvas.width;
 
-        minDimension2 = 10;
-        maxDimension2 = 150;
+            minDimension2 = 10;
+            maxDimension2 = 150;
 
-        dimension2 = Math.floor(Math.random() * (maxDimension2 - minDimension2 + 1) + minDimension2);
+            dimension2 = Math.floor(Math.random() * (maxDimension2 - minDimension2 + 1) + minDimension2);
 
-        minGap = 50;
-        maxGap = 800;
+            minGap = 50;
+            maxGap = 800;
 
-        gap2 = Math.floor(Math.random() * (maxGap - minGap + 1) + minGap);
+            gap2 = Math.floor(Math.random() * (maxGap - minGap + 1) + minGap);
 
-        myAstroid.push(new component(dimension2, dimension2, "red", x, gap2));
-    }
-    if (myGameArea.frameNo == 1 || everyInterval(600)) {
-        x = myGameArea.canvas.width;
+            myAstroid.push(new component(dimension2, dimension2, "red", x, gap2));
+        }
+        if (myGameArea.frameNo == 1 || everyInterval(550)) {
+            x = myGameArea.canvas.width;
 
-        minDimension3 = 50;
-        maxDimension3 = 300;
+            minDimension3 = 50;
+            maxDimension3 = 300;
 
-        dimension3 = Math.floor(Math.random() * (maxDimension3 - minDimension3 + 1) + minDimension3);
+            dimension3 = Math.floor(Math.random() * (maxDimension3 - minDimension3 + 1) + minDimension3);
 
-        minGap = 50;
-        maxGap = 800;
+            minGap = 50;
+            maxGap = 800;
 
-        gap3 = Math.floor(Math.random() * (maxGap - minGap + 1) + minGap);
+            gap3 = Math.floor(Math.random() * (maxGap - minGap + 1) + minGap);
 
-        myAstroid.push(new component(dimension3, dimension3, "pink", x, gap3));
+            myAstroid.push(new component(dimension3, dimension3, "pink", x, gap3));
+        }
+    } else if (myGameArea.frameNo < 1300){
+        if (myGameArea.frameNo == 1 || everyInterval(75)) {
+            x = myGameArea.canvas.width;
+            minDimension1 = 20;
+            maxDimension1 = 200;
+
+            dimension1 = Math.floor(Math.random() * (maxDimension1 - minDimension1 + 1) + minDimension1);
+
+            minGap = 50;
+            maxGap = 800;
+            gap1 = Math.floor(Math.random() * (maxGap - minGap + 1) + minGap);
+
+            myAstroid.push(new component(dimension1, dimension1, "green", x, gap1));
+
+        }
+        if (myGameArea.frameNo == 1 || everyInterval(180)) {
+            x = myGameArea.canvas.width;
+
+            minDimension2 = 10;
+            maxDimension2 = 150;
+
+            dimension2 = Math.floor(Math.random() * (maxDimension2 - minDimension2 + 1) + minDimension2);
+
+            minGap = 50;
+            maxGap = 800;
+
+            gap2 = Math.floor(Math.random() * (maxGap - minGap + 1) + minGap);
+
+            myAstroid.push(new component(dimension2, dimension2, "red", x, gap2));
+        }
+        if (myGameArea.frameNo == 1 || everyInterval(250)) {
+            x = myGameArea.canvas.width;
+
+            minDimension3 = 50;
+            maxDimension3 = 300;
+
+            dimension3 = Math.floor(Math.random() * (maxDimension3 - minDimension3 + 1) + minDimension3);
+
+            minGap = 50;
+            maxGap = 800;
+
+            gap3 = Math.floor(Math.random() * (maxGap - minGap + 1) + minGap);
+
+            myAstroid.push(new component(dimension3, dimension3, "pink", x, gap3));
+        }
+    } else if (myGameArea.frameNo < 9000){
+        if (myGameArea.frameNo == 1 || everyInterval(25)) {
+            x = myGameArea.canvas.width;
+            minDimension1 = 20;
+            maxDimension1 = 200;
+
+            dimension1 = Math.floor(Math.random() * (maxDimension1 - minDimension1 + 1) + minDimension1);
+
+            minGap = 50;
+            maxGap = 800;
+            gap1 = Math.floor(Math.random() * (maxGap - minGap + 1) + minGap);
+
+            myAstroid.push(new component(dimension1, dimension1, "green", x, gap1));
+
+        }
+        if (myGameArea.frameNo == 1 || everyInterval(60)) {
+            x = myGameArea.canvas.width;
+
+            minDimension2 = 10;
+            maxDimension2 = 150;
+
+            dimension2 = Math.floor(Math.random() * (maxDimension2 - minDimension2 + 1) + minDimension2);
+
+            minGap = 50;
+            maxGap = 800;
+
+            gap2 = Math.floor(Math.random() * (maxGap - minGap + 1) + minGap);
+
+            myAstroid.push(new component(dimension2, dimension2, "red", x, gap2));
+        }
+        if (myGameArea.frameNo == 1 || everyInterval(140)) {
+            x = myGameArea.canvas.width;
+
+            minDimension3 = 50;
+            maxDimension3 = 300;
+
+            dimension3 = Math.floor(Math.random() * (maxDimension3 - minDimension3 + 1) + minDimension3);
+
+            minGap = 50;
+            maxGap = 800;
+
+            gap3 = Math.floor(Math.random() * (maxGap - minGap + 1) + minGap);
+
+            myAstroid.push(new component(dimension3, dimension3, "pink", x, gap3));
+        }
+    } else if (myGameArea.frameNo < 9000){
+        if (myGameArea.frameNo == 1 || everyInterval(3)) {
+            x = myGameArea.canvas.width;
+            minDimension1 = 20;
+            maxDimension1 = 200;
+
+            dimension1 = Math.floor(Math.random() * (maxDimension1 - minDimension1 + 1) + minDimension1);
+
+            minGap = 50;
+            maxGap = 800;
+            gap1 = Math.floor(Math.random() * (maxGap - minGap + 1) + minGap);
+
+            myAstroid.push(new component(dimension1, dimension1, "green", x, gap1));
+
+        }
+        if (myGameArea.frameNo == 1 || everyInterval(5)) {
+            x = myGameArea.canvas.width;
+
+            minDimension2 = 10;
+            maxDimension2 = 150;
+
+            dimension2 = Math.floor(Math.random() * (maxDimension2 - minDimension2 + 1) + minDimension2);
+
+            minGap = 50;
+            maxGap = 800;
+
+            gap2 = Math.floor(Math.random() * (maxGap - minGap + 1) + minGap);
+
+            myAstroid.push(new component(dimension2, dimension2, "red", x, gap2));
+        }
+        if (myGameArea.frameNo == 1 || everyInterval(3)) {
+            x = myGameArea.canvas.width;
+
+            minDimension3 = 50;
+            maxDimension3 = 300;
+
+            dimension3 = Math.floor(Math.random() * (maxDimension3 - minDimension3 + 1) + minDimension3);
+
+            minGap = 50;
+            maxGap = 800;
+
+            gap3 = Math.floor(Math.random() * (maxGap - minGap + 1) + minGap);
+
+            myAstroid.push(new component(dimension3, dimension3, "pink", x, gap3));
+        }
     }
 
     for (i = 0; i < myAstroid.length; i += 1) {
-        myAstroid[i].x -= 1;
-        myAstroid[i].angle += 1 * Math.PI /180;
+        if (myGameArea.frameNo < 300) {
+            myAstroid[i].x -= 1;
+            console.log("Slowly")
+        } else {
+            myAstroid[i].x -= myGameArea.frameNo / 300;
+            console.log("Faster!")
+        }
+        myAstroid[i].angle += 1 * Math.PI / 180;
         myAstroid[i].update();
         console.log("got number 2")
     }
@@ -218,3 +363,4 @@ function everyInterval(n) {
     }
     return false;
 }
+
