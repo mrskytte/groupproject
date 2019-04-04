@@ -4,12 +4,13 @@ startBtn.addEventListener("click", startGame)
 var mySpaceShip;
 var myAstroid = [];
 var myDistance;
+var restart;
 
 function startGame() {
     //    Create Canvas
     myGameArea.start();
     //    Create Spaceship
-    mySpaceShip = new component(30, 10, "yellow", 10, 400);
+    mySpaceShip = new component(50, 30, "images/spaceship.png", 10, 400, "image");
     //    Distance Traveled (Score)
     myDistance = new component("25px", "Consolas", "white", 1280 * 0.60, 40, "text")
 }
@@ -48,6 +49,10 @@ var myGameArea = {
 //Create Spaceship Function
 function component(width, height, color, x, y, type) {
     this.type = type;
+    if (this.type == "image") {
+        this.image = new Image();
+        this.image.src = color;
+    }
     this.width = width;
     this.height = height;
     this.angle = 0;
@@ -62,6 +67,11 @@ function component(width, height, color, x, y, type) {
             ctx.font = this.width + " " + this.height;
             ctx.fillStyle = color;
             ctx.fillText(this.text, this.x, this.y);
+        } else if (this.type == "image") {
+            ctx.drawImage(this.image,
+                this.x,
+                this.y,
+                this.width, this.height)
         } else {
             ctx.fillStyle = color;
             ctx.fillRect(this.x, this.y, this.width, this.height);
@@ -112,7 +122,6 @@ function component(width, height, color, x, y, type) {
     }
 }
 
-
 //Makes the Game Run (by deleting and adding frames)
 function updateGameArea() {
     var x, y;
@@ -120,13 +129,12 @@ function updateGameArea() {
     for (i = 0; i < myAstroid.length; i += 1) {
         if (mySpaceShip.crashWith(myAstroid[i])) {
             myGameArea.stop();
-            return;
         }
     }
 
     myGameArea.clear();
     myGameArea.frameNo += 1;
-//    Generates new astroids for three different frameNo
+    //    Generates new astroids for three different frameNo
     if (myGameArea.frameNo < 300) {
         if (myGameArea.frameNo == 1 || everyInterval(400)) {
             x = myGameArea.canvas.width;
@@ -172,7 +180,7 @@ function updateGameArea() {
 
             myAstroid.push(new component(dimension3, dimension3, "pink", x, gap3));
         }
-    } else if (myGameArea.frameNo < 1300){
+    } else if (myGameArea.frameNo < 1300) {
         if (myGameArea.frameNo == 1 || everyInterval(75)) {
             x = myGameArea.canvas.width;
             minDimension1 = 20;
@@ -217,7 +225,7 @@ function updateGameArea() {
 
             myAstroid.push(new component(dimension3, dimension3, "pink", x, gap3));
         }
-    } else if (myGameArea.frameNo < 9000){
+    } else if (myGameArea.frameNo < 9000) {
         if (myGameArea.frameNo == 1 || everyInterval(25)) {
             x = myGameArea.canvas.width;
             minDimension1 = 20;
@@ -262,7 +270,7 @@ function updateGameArea() {
 
             myAstroid.push(new component(dimension3, dimension3, "pink", x, gap3));
         }
-    } else if (myGameArea.frameNo < 9000){
+    } else if (myGameArea.frameNo < 9000) {
         if (myGameArea.frameNo == 1 || everyInterval(3)) {
             x = myGameArea.canvas.width;
             minDimension1 = 20;
@@ -363,4 +371,3 @@ function everyInterval(n) {
     }
     return false;
 }
-
