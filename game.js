@@ -4,7 +4,7 @@ startBtn.addEventListener("click", startGame)
 var mySpaceShip;
 var myAstroid = [];
 var myDistance;
-var restart;
+var myRestart = 0;
 
 function startGame() {
     //    Create Canvas
@@ -12,7 +12,7 @@ function startGame() {
     //    Create Spaceship
     mySpaceShip = new component(50, 30, "images/spaceship.png", 10, 400, "image");
     //    Distance Traveled (Score)
-    myDistance = new component("25px", "Consolas", "white", 1280 * 0.60, 40, "text")
+    myDistance = new component("25px", "Consolas", "white", 1280 * 0.59, 40, "text")
 }
 
 const main = document.querySelector("#main");
@@ -125,10 +125,12 @@ function component(width, height, color, x, y, type) {
 //Makes the Game Run (by deleting and adding frames)
 function updateGameArea() {
     var x, y;
+    console.log(myRestart)
 
     for (i = 0; i < myAstroid.length; i += 1) {
         if (mySpaceShip.crashWith(myAstroid[i])) {
             myGameArea.stop();
+            myRestart += 1;
         }
     }
 
@@ -136,10 +138,10 @@ function updateGameArea() {
     myGameArea.frameNo += 1;
     //    Generates new astroids for three different frameNo
     if (myGameArea.frameNo < 300) {
-        if (myGameArea.frameNo == 1 || everyInterval(400)) {
+        if (myGameArea.frameNo == 20 || everyInterval(400)) {
             x = myGameArea.canvas.width;
-            minDimension1 = 20;
-            maxDimension1 = 200;
+            minDimension1 = 25;
+            maxDimension1 = 50;
 
             dimension1 = Math.floor(Math.random() * (maxDimension1 - minDimension1 + 1) + minDimension1);
 
@@ -147,13 +149,13 @@ function updateGameArea() {
             maxGap = 800;
             gap1 = Math.floor(Math.random() * (maxGap - minGap + 1) + minGap);
 
-            myAstroid.push(new component(dimension1, dimension1, "green", x, gap1));
+            myAstroid.push(new component(dimension1, dimension1, "images/asteroidSmall.png", x, gap1, "image"));
 
         }
-        if (myGameArea.frameNo == 1 || everyInterval(150)) {
+        if (myGameArea.frameNo == 10 || everyInterval(150)) {
             x = myGameArea.canvas.width;
 
-            minDimension2 = 10;
+            minDimension2 = 75;
             maxDimension2 = 150;
 
             dimension2 = Math.floor(Math.random() * (maxDimension2 - minDimension2 + 1) + minDimension2);
@@ -163,12 +165,12 @@ function updateGameArea() {
 
             gap2 = Math.floor(Math.random() * (maxGap - minGap + 1) + minGap);
 
-            myAstroid.push(new component(dimension2, dimension2, "red", x, gap2));
+            myAstroid.push(new component(dimension2, dimension2, "images/asteroidMedium.png", x, gap2, "image"));
         }
         if (myGameArea.frameNo == 1 || everyInterval(550)) {
             x = myGameArea.canvas.width;
 
-            minDimension3 = 50;
+            minDimension3 = 150;
             maxDimension3 = 300;
 
             dimension3 = Math.floor(Math.random() * (maxDimension3 - minDimension3 + 1) + minDimension3);
@@ -178,13 +180,13 @@ function updateGameArea() {
 
             gap3 = Math.floor(Math.random() * (maxGap - minGap + 1) + minGap);
 
-            myAstroid.push(new component(dimension3, dimension3, "pink", x, gap3));
+            myAstroid.push(new component(dimension3, dimension3, "images/asteroidBig.png", x, gap3, "image"));
         }
     } else if (myGameArea.frameNo < 1300) {
         if (myGameArea.frameNo == 1 || everyInterval(75)) {
             x = myGameArea.canvas.width;
-            minDimension1 = 20;
-            maxDimension1 = 200;
+            minDimension1 = 25;
+            maxDimension1 = 50;
 
             dimension1 = Math.floor(Math.random() * (maxDimension1 - minDimension1 + 1) + minDimension1);
 
@@ -192,13 +194,13 @@ function updateGameArea() {
             maxGap = 800;
             gap1 = Math.floor(Math.random() * (maxGap - minGap + 1) + minGap);
 
-            myAstroid.push(new component(dimension1, dimension1, "green", x, gap1));
+            myAstroid.push(new component(dimension1, dimension1, "images/asteroidSmall.png", x, gap1, "image"));
 
         }
         if (myGameArea.frameNo == 1 || everyInterval(180)) {
             x = myGameArea.canvas.width;
 
-            minDimension2 = 10;
+            minDimension2 = 75;
             maxDimension2 = 150;
 
             dimension2 = Math.floor(Math.random() * (maxDimension2 - minDimension2 + 1) + minDimension2);
@@ -208,12 +210,12 @@ function updateGameArea() {
 
             gap2 = Math.floor(Math.random() * (maxGap - minGap + 1) + minGap);
 
-            myAstroid.push(new component(dimension2, dimension2, "red", x, gap2));
+            myAstroid.push(new component(dimension2, dimension2, "images/asteroidMedium.png", x, gap2, "image"));
         }
         if (myGameArea.frameNo == 1 || everyInterval(250)) {
             x = myGameArea.canvas.width;
 
-            minDimension3 = 50;
+            minDimension3 = 150;
             maxDimension3 = 300;
 
             dimension3 = Math.floor(Math.random() * (maxDimension3 - minDimension3 + 1) + minDimension3);
@@ -223,13 +225,13 @@ function updateGameArea() {
 
             gap3 = Math.floor(Math.random() * (maxGap - minGap + 1) + minGap);
 
-            myAstroid.push(new component(dimension3, dimension3, "pink", x, gap3));
+            myAstroid.push(new component(dimension3, dimension3, "images/asteroidBig.png", x, gap3, "image"));
         }
     } else if (myGameArea.frameNo < 9000) {
         if (myGameArea.frameNo == 1 || everyInterval(25)) {
             x = myGameArea.canvas.width;
-            minDimension1 = 20;
-            maxDimension1 = 200;
+            minDimension1 = 25;
+            maxDimension1 = 50;
 
             dimension1 = Math.floor(Math.random() * (maxDimension1 - minDimension1 + 1) + minDimension1);
 
@@ -237,13 +239,13 @@ function updateGameArea() {
             maxGap = 800;
             gap1 = Math.floor(Math.random() * (maxGap - minGap + 1) + minGap);
 
-            myAstroid.push(new component(dimension1, dimension1, "green", x, gap1));
+            myAstroid.push(new component(dimension1, dimension1, "images/asteroidSmall.png", x, gap1, "image"));
 
         }
         if (myGameArea.frameNo == 1 || everyInterval(60)) {
             x = myGameArea.canvas.width;
 
-            minDimension2 = 10;
+            minDimension2 = 75;
             maxDimension2 = 150;
 
             dimension2 = Math.floor(Math.random() * (maxDimension2 - minDimension2 + 1) + minDimension2);
@@ -253,12 +255,12 @@ function updateGameArea() {
 
             gap2 = Math.floor(Math.random() * (maxGap - minGap + 1) + minGap);
 
-            myAstroid.push(new component(dimension2, dimension2, "red", x, gap2));
+            myAstroid.push(new component(dimension2, dimension2, "images/asteroidMedium.png", x, gap2, "image"));
         }
         if (myGameArea.frameNo == 1 || everyInterval(140)) {
             x = myGameArea.canvas.width;
 
-            minDimension3 = 50;
+            minDimension3 = 150;
             maxDimension3 = 300;
 
             dimension3 = Math.floor(Math.random() * (maxDimension3 - minDimension3 + 1) + minDimension3);
@@ -268,7 +270,7 @@ function updateGameArea() {
 
             gap3 = Math.floor(Math.random() * (maxGap - minGap + 1) + minGap);
 
-            myAstroid.push(new component(dimension3, dimension3, "pink", x, gap3));
+            myAstroid.push(new component(dimension3, dimension3, "images/asteroidBig.png", x, gap3, "image"));
         }
     } else if (myGameArea.frameNo < 9000) {
         if (myGameArea.frameNo == 1 || everyInterval(3)) {
@@ -342,25 +344,56 @@ function updateGameArea() {
 
     //    UP
     if (myGameArea.keys && myGameArea.keys[38]) {
+        mySpaceShip.image.src = "images/spaceshipFlame.png";
         mySpaceShip.speedY -= 2;
+    } else {
+        mySpaceShip.image.src = "images/spaceship.png"
     }
 
     //    DOWN
     if (myGameArea.keys && myGameArea.keys[40]) {
+        mySpaceShip.image.src = "images/spaceshipFlame.png";
         mySpaceShip.speedY += 2;
-        console.log(myGameArea.frameNo)
+    } else {
+        mySpaceShip.image.src = "images/spaceship.png"
     }
 
     //Untag if we need left and right movement*
 
     //    LEFT
     if (myGameArea.keys && myGameArea.keys[37]) {
+        mySpaceShip.image.src = "images/spaceshipFlame.png";
         mySpaceShip.speedX -= 2;
+    } else {
+        mySpaceShip.image.src = "images/spaceship.png"
     }
 
     //    RIGHT
     if (myGameArea.keys && myGameArea.keys[39]) {
+        mySpaceShip.image.src = "images/spaceshipFlame.png";
+        mySpaceShip.width = 87;
         mySpaceShip.speedX += (2 + mySpaceShip.gravity);
+    } else {
+        mySpaceShip.image.src = "images/spaceship.png"
+        mySpaceShip.width = 50;
+    }
+    if (myGameArea.frameNo == 1000) {
+        alert("YOU MADE IT THROUGH!");
+        document.location.reload();
+        clearInterval(interval);
+    }
+    if (myRestart >= 1) {
+         function functionAlert(msg, myYes) {
+            var confirmBox = $("#confirm");
+            confirmBox.find(".message").text(msg);
+            confirmBox.find(".yes").unbind().click(function() {
+               confirmBox.hide();
+            });
+            confirmBox.find(".yes").click(myYes);
+            confirmBox.show();
+         }
+        document.location.reload();
+        clearInterval(interval);
     }
 
 }
