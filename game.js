@@ -1,10 +1,16 @@
-const startBtn = document.querySelector("#startgame")
+const startBtn = document.querySelector("#startBtn")
 startBtn.addEventListener("click", startGame)
+const startPage = document.querySelector("#startpage")
+const endPage = document.querySelector("#endpage")
+const main = document.querySelector("#main");
 
 var mySpaceShip;
 var myAstroid = [];
 var myDistance;
 var myRestart = 0;
+var mySound;
+var myThrust;
+
 
 function startGame() {
     //    Create Canvas
@@ -12,10 +18,29 @@ function startGame() {
     //    Create Spaceship
     mySpaceShip = new component(50, 30, "images/spaceship.png", 10, 400, "image");
     //    Distance Traveled (Score)
-    myDistance = new component("25px", "Consolas", "white", 1280 * 0.59, 40, "text")
+    myDistance = new component("25px", "Consolas", "white", 1280 * 0.55, 40, "text")
+    // Audio
+    mySound = new sound("audio/BGaudio.mp3")
+    mySound.play();
+    myThrust = new sound("audio/thrust.mp3")
+    startPage.classList.add("hide")
 }
 
-const main = document.querySelector("#main");
+// Adds audio
+function sound(src) {
+    this.sound = document.createElement("audio");
+    this.sound.src = src;
+    this.sound.setAttribute("preload", "auto");
+    this.sound.setAttribute("controls", "none");
+    this.sound.style.display = "none";
+    document.body.appendChild(this.sound);
+    this.play = function () {
+        this.sound.play();
+    }
+    this.stop = function () {
+        this.sound.pause();
+    }
+}
 
 //Create Canvas Function
 var myGameArea = {
@@ -122,11 +147,15 @@ function component(width, height, color, x, y, type) {
     }
 }
 
+//end of game function
+//function win() {
+//    console.log("win win")
+//    endPage.classList.remove("hide");
+
+//}
 //Makes the Game Run (by deleting and adding frames)
 function updateGameArea() {
     var x, y;
-    console.log(myRestart)
-
     for (i = 0; i < myAstroid.length; i += 1) {
         if (mySpaceShip.crashWith(myAstroid[i])) {
             myGameArea.stop();
@@ -322,17 +351,14 @@ function updateGameArea() {
     for (i = 0; i < myAstroid.length; i += 1) {
         if (myGameArea.frameNo < 300) {
             myAstroid[i].x -= 1;
-            console.log("Slowly")
         } else {
             myAstroid[i].x -= myGameArea.frameNo / 300;
-            console.log("Faster!")
         }
         myAstroid[i].angle += 1 * Math.PI / 180;
         myAstroid[i].update();
-        console.log("got number 2")
     }
 
-    myDistance.text = "DISTANCE:  " + myGameArea.frameNo;
+    myDistance.text = "DISTANCE:  " + myGameArea.frameNo + " LY";
     myDistance.update();
     mySpaceShip.newPos();
     mySpaceShip.update();
@@ -364,6 +390,7 @@ function updateGameArea() {
     if (myGameArea.keys && myGameArea.keys[37]) {
         mySpaceShip.image.src = "images/spaceshipFlame.png";
         mySpaceShip.speedX -= 2;
+
     } else {
         mySpaceShip.image.src = "images/spaceship.png"
     }
@@ -373,29 +400,29 @@ function updateGameArea() {
         mySpaceShip.image.src = "images/spaceshipFlame.png";
         mySpaceShip.width = 87;
         mySpaceShip.speedX += (2 + mySpaceShip.gravity);
+        myThrust.play();
+
     } else {
         mySpaceShip.image.src = "images/spaceship.png"
         mySpaceShip.width = 50;
+        myThrust.stop()
     }
-    if (myGameArea.frameNo == 1000) {
-        alert("YOU MADE IT THROUGH!");
-        document.location.reload();
-        clearInterval(interval);
-    }
-    if (myRestart >= 1) {
-         function functionAlert(msg, myYes) {
-            var confirmBox = $("#confirm");
-            confirmBox.find(".message").text(msg);
-            confirmBox.find(".yes").unbind().click(function() {
-               confirmBox.hide();
-            });
-            confirmBox.find(".yes").click(myYes);
-            confirmBox.show();
-         }
-        document.location.reload();
-        clearInterval(interval);
-    }
+    if (myGameArea.frameNo == 1500) {
+            console.log("win win")
+            endPage.classList.remove("hide");
+        const canvas = document.querySelector("canvas")
+        canvas.classList.add("hide")
+        mySound.stop();
 
+    }
+//        document.location.reload();
+//        clearInterval(interval);
+
+
+    if (myRestart >= 1) {
+        document.location.reload();
+        clearInterval(interval);
+    }
 }
 
 function everyInterval(n) {

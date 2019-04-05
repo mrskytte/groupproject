@@ -6,3 +6,19 @@ canvas {
 button {
     cursor: pointer;
 }
+
+
+.emptypage {
+    width: 960px;
+    height: 768px;
+    background: black;
+    text-align: center;
+}
+
+#startBtn, #endBtn {
+    margin-top: 350px;
+}
+
+.hide {
+    display: none;
+}
