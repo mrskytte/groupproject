@@ -408,16 +408,12 @@ function updateGameArea() {
         myThrust.stop()
     }
     if (myGameArea.frameNo == 1500) {
-            console.log("win win")
             endPage.classList.remove("hide");
         const canvas = document.querySelector("canvas")
         canvas.classList.add("hide")
         mySound.stop();
 
     }
-//        document.location.reload();
-//        clearInterval(interval);
-
 
     if (myRestart >= 1) {
         document.location.reload();
