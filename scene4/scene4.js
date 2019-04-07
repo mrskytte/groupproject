@@ -9,19 +9,14 @@ var phoneSound;
 var BTsound;
 var scene4BGSound;
 
-
-
 //Add key listeners
-cupboard.addEventListener("click", clickCupboard)
-stone.addEventListener("click", clickStone)
-dustbin.addEventListener("click", clickDustbin)
 scene4txt.addEventListener("click", clickScenetxt)
 scene4BT.addEventListener("click", clickBT)
 window.addEventListener("click", startSound)
 //goScene5.addEventListener("click", clickNextBtn)
 
 //Add BG audio function
-function BGsound(src) {
+function loopSound(src) {
     this.sound = document.createElement("audio");
     this.sound.src = src;
     this.sound.setAttribute("preload", "auto");
@@ -52,26 +47,15 @@ function sound(src) {
         this.sound.pause();
     }
 }
-//Add counters for clickables
-var cupboardClick = 0;
-var stoneClick = 0;
-var dustbinClick = 0;
-var BGsoundclick = 0;
-var enableClick = 0;
-
 
 //Add counter for phone to ring
 var globalClick = 0;
 
 //Background Audio
 function startSound() {
-    if (BGsoundclick != 0) {
-
-    } else {
-        scene4BGSound = new BGsound("audio/bg_sound.mp3");
-        scene4BGSound.play();
-        BGsoundclick++;
-    }
+    scene4BGSound = new loopSound("audio/bg_sound.mp3");
+    scene4BGSound.play();
+    window.removeEventListener("click", startSound)
 }
 
 //Click BT to show text and play BT audio and lowers BG audio
@@ -89,65 +73,50 @@ function clickScenetxt() {
     document.querySelector("audio").volume = 1;
     scene4txt.classList.add("fadetxt");
     scene4BT.classList.add("fadeBT");
-    enableClick++;
     dustbin.classList.add("glow")
     stone.classList.add("glow")
     cupboard.classList.add("glow")
+    cupboard.addEventListener("click", clickCupboard)
+    stone.addEventListener("click", clickStone)
+    dustbin.addEventListener("click", clickDustbin)
     scene4txt.removeEventListener("click", clickScenetxt)
 }
 
 //Click dustbin adds to individual counter plus phone counter - can only be clicked once
 function clickDustbin() {
-    if (enableClick == 0) {
-
-    } else if (dustbinClick != 0) {
-
-    } else {
-        dustbinClick++;
         globalClick++;
         dustbin.classList.remove("glow");
-    }
-
 }
 
 
 //Click cupboard adds to individual counter plus phone counter - can only be clicked once
 function clickCupboard() {
-    if (enableClick == 0) {
-
-    } else if (cupboardClick != 0) {
-
-    } else {
-        cupboardClick++;
         globalClick++;
         cupboard.classList.remove("glow");
-    }
-
 }
 
 //Click stone adds to individual counter plus phone counter - can only be clicked once
 function clickStone() {
-    if (enableClick == 0) {
-
-    } else if (stoneClick != 0) {
-
-    } else {
-        stoneClick++;
         globalClick++;
         stone.classList.remove("glow");
-    }
 }
 
 //Phone rings when counter is at 3
-var phoneCheck = setInterval(function() {
-    if(globalClick >= 3){
-        phoneSound = new sound("audio/scene_5_telephone.mp3")
+var phoneCheck = setInterval(function () {
+    if (globalClick >= 3) {
+        document.querySelector("audio").volume = 0.3;
+        phoneSound = new loopSound("audio/scene_5_telephone.mp3")
         phoneSound.play();
         clearInterval(phoneCheck);
+        goToScene5();
     } else {
-        console.log("No ring")
+
     }
 }, 1000)
 
 
 //Next button appears
+function goToScene5() {
+    goScene5.classList.add("appear")
+    goScene5.classList.remove("hide")
+}
