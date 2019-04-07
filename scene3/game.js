@@ -3,14 +3,17 @@ startBtn.addEventListener("click", startGame)
 const startPage = document.querySelector("#startpage")
 const endPage = document.querySelector("#endpage")
 const main = document.querySelector("#main");
+const restartBtn = document.querySelector("#restart")
 
 var mySpaceShip;
 var myAstroid = [];
 var myDistance;
 var myRestart = 0;
-var mySound;
+var BGsound;
 var myThrust;
+var crashSound;
 
+restartBtn.addEventListener("click", restartGame)
 
 function startGame() {
     //    Create Canvas
@@ -20,8 +23,8 @@ function startGame() {
     //    Distance Traveled (Score)
     myDistance = new component("25px", "Consolas", "white", 1280 * 0.55, 40, "text")
     // Audio
-    mySound = new sound("audio/BGaudio.mp3")
-    mySound.play();
+    BGsound = new sound("audio/BGaudio.mp3")
+    BGsound.play();
     myThrust = new sound("audio/thrust.mp3")
     startPage.classList.add("hide")
 }
@@ -408,7 +411,7 @@ function updateGameArea() {
         myThrust.stop()
     }
     if (myGameArea.frameNo == 1500) {
-            endPage.classList.remove("hide");
+        endPage.classList.remove("hide");
         const canvas = document.querySelector("canvas")
         canvas.classList.add("hide")
         mySound.stop();
@@ -416,8 +419,11 @@ function updateGameArea() {
     }
 
     if (myRestart >= 1) {
-        document.location.reload();
-        clearInterval(interval);
+        crashSound = new sound("audio/crash.mp3")
+        crashSound.play();
+        BGsound.stop();
+        myThrust.stop();
+        restartBtn.classList.remove("hide")
     }
 }
 
@@ -426,4 +432,8 @@ function everyInterval(n) {
         return true;
     }
     return false;
+}
+function restartGame() {
+           document.location.reload();
+                clearInterval(interval);
 }
