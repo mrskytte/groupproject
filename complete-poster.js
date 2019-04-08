@@ -2,19 +2,22 @@
 
 //Scenes
 
-//Scene1 Elements
+    //Scene1 Elements
 const scene1 = document.querySelector("#scene1");
+const scene1BT = document.querySelector("#scene1bt");
 
-//Scene2 Elements
+    //Scene2 Elements
 const scene2 = document.querySelector("#scene2");
+const scene2SpaceShip = document.querySelector("#scene2spaceship");
+const scene2BT = document.querySelector("scene2BT");
 
-//Scene3 Elements
+    //Scene3 Elements
 const scene3 = document.querySelector("#scene3");
 const startPage = document.querySelector("#startpage")
 const endPage = document.querySelector("#endpage")
 const main = document.querySelector("#main");
 
-//Scene4 Elements
+    //Scene4 Elements
 const scene4 = document.querySelector("#scene4");
 const cupboard = document.querySelector("#cupboard")
 const stone = document.querySelector("#stone")
@@ -22,14 +25,16 @@ const dustbin = document.querySelector("#dustbin")
 const scene4txt = document.querySelector("#scene4txt")
 const scene4BT = document.querySelector("#scene4BT")
 
-//Scene5 Elements
+    //Scene5 Elements
 const scene5 = document.querySelector("#scene5");
 
-//Scene6 Elements
+    //Scene6 Elements
 const scene6 = document.querySelector("#scene6");
 
-//Scene7 Elements
+    //Scene7 Elements
 const scene7 = document.querySelector("#scene7");
+const biker = document.querySelector("#biker")
+const credits = document.querySelector("#credits")
 
 //Buttons
 
@@ -125,6 +130,13 @@ function loopSound(src) {
     this.stop = function () {
         this.sound.pause();
     }
+}
+
+//Start Poster
+function startPoster(){
+    scene1BGsound = new sound("audio/scene1BGsound.mp3");
+    scene1BGsound.play();
+
 }
 
 //Create Function for Scene 1 Next Button
