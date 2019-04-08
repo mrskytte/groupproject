@@ -4,7 +4,16 @@
     src: url(font/pokemon.ttf);
 }
 
+.hide {
+    display: none;
+}
+
+.glow {
+    -webkit-filter: drop-shadow(0px 0px 80px rgba(255, 238, 1, 0.8));
+}
+
 /* Scene 1 (Running Across Screen) */
+
 #scene1 {
     background-image: url(images/dustbin_scene1_BG.png);
     background-size: contain;
@@ -110,7 +119,9 @@
 
 }
 
+
 /* Scene 2 (Blast Off) */
+
 #scene2 {
     background-image: url(image/dustbin_scene2_BGandtext.png);
     background-size: contain;
@@ -119,7 +130,7 @@
     overflow: hidden;
 }
 
-#btrun {
+.btrun {
     animation: runz 2s linear forwards;
 }
 
@@ -138,7 +149,7 @@
     }
 }
 
-#spaceship {
+.spaceshipblastoff {
     animation: blastoff 5s ease-in forwards;
 }
 
@@ -160,16 +171,13 @@
     }
 }
 
+
 /* Scene 3 (Game) */
+
 canvas {
     border: 1px solid black;
     background-color: black;
 }
-
-button {
-    cursor: pointer;
-}
-
 
 .emptypage {
     width: 960px;
@@ -183,11 +191,9 @@ button {
     margin-top: 250px;
 }
 
-.hide {
-    display: none;
-}
 
 /* Scene 4 (Interactive Click Game)*/
+
 #scene4 {
     width: 960px;
     height: 771px;
@@ -229,10 +235,6 @@ button {
     left: 450px;
 }
 
-.glow {
-    -webkit-filter: drop-shadow(0px 0px 80px rgba(255, 238, 1, 0.8));
-}
-
 .fadetxt {
     animation: fadetxt 1s forwards;
 }
@@ -272,9 +274,6 @@ button {
     left: 1000px;
 }
 
-.hide {
-    display: none;
-}
 
 .appear {
     animation: appear 1s forwards;
@@ -290,7 +289,9 @@ button {
     }
 }
 
+
 /* Scene 5 (Phone Ringing)*/
+
 #scene5 {
     background-image: url(images/dustbin_scene5_BGandtext.png);
     background-size: contain;
@@ -318,7 +319,6 @@ button {
     height: 300px;
     background-image: url(images/sprite05.png);
     animation: spriteAnimation 3s steps(7) alternate infinite;
-
 }
 
 @keyframes spriteAnimation {
@@ -326,6 +326,7 @@ button {
         background-position: -3500px;
     }
 }
+
 
 /* Scene 6 (Call to Action)*/
 
@@ -343,6 +344,7 @@ button {
         background-image: url(images/dustbin_scene6B.png)
     }
 }
+
 
 /* Scene 7 (Credits)*/
 
