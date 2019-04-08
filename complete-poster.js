@@ -2,22 +2,22 @@
 
 //Scenes
 
-    //Scene1 Elements
+//Scene1 Elements
 const scene1 = document.querySelector("#scene1");
 const scene1BT = document.querySelector("#scene1bt");
 
-    //Scene2 Elements
+//Scene2 Elements
 const scene2 = document.querySelector("#scene2");
 const scene2SpaceShip = document.querySelector("#scene2spaceship");
-const scene2BT = document.querySelector("scene2BT");
+const scene2BT = document.querySelector("#scene2BT");
 
-    //Scene3 Elements
+//Scene3 Elements
 const scene3 = document.querySelector("#scene3");
 const startPage = document.querySelector("#startpage")
 const endPage = document.querySelector("#endpage")
 const main = document.querySelector("#main");
 
-    //Scene4 Elements
+//Scene4 Elements
 const scene4 = document.querySelector("#scene4");
 const cupboard = document.querySelector("#cupboard")
 const stone = document.querySelector("#stone")
@@ -25,13 +25,13 @@ const dustbin = document.querySelector("#dustbin")
 const scene4txt = document.querySelector("#scene4txt")
 const scene4BT = document.querySelector("#scene4BT")
 
-    //Scene5 Elements
+//Scene5 Elements
 const scene5 = document.querySelector("#scene5");
 
-    //Scene6 Elements
+//Scene6 Elements
 const scene6 = document.querySelector("#scene6");
 
-    //Scene7 Elements
+//Scene7 Elements
 const scene7 = document.querySelector("#scene7");
 const biker = document.querySelector("#biker")
 const credits = document.querySelector("#credits")
@@ -44,6 +44,7 @@ const goScene3Btn = document.querySelector("#goscene3");
 const goScene4Btn = document.querySelector("#goscene4");
 const goScene5Btn = document.querySelector("#goscene5");
 const goScene6Btn = document.querySelector("#goscene6");
+const goScene7Btn = document.querySelector("#goscene7");
 
 //Start Button
 const startPosterBtn = document.querySelector("#startposter");
@@ -61,22 +62,24 @@ var myDistance;
 
 //Sounds
 var scene1BGsound;
-var scene2BGsound;
 var scene2Thrust;
 var scene3BGsound;
 var scene3Thrust;
 var scene3crashSound;
-var phoneSound;
+var phoneSound1;
+var phoneSound2;
 var scene4BTsound;
 var scene4BGSound;
 var scene5Phone;
 var scene6BGsound;
-var scene7BGsound;
 
 //Counters
 var btnCount = 0;
 var myRestart = 0;
 var scene4Click = 0;
+var dustbinCount = 0;
+var stoneCount = 0;
+var cupboardCount = 0;
 
 //Add Event Listeners to Buttons
 //SCENE 4
@@ -89,6 +92,7 @@ goScene3Btn.addEventListener("click", goScene3);
 goScene4Btn.addEventListener("click", goScene4);
 goScene5Btn.addEventListener("click", goScene5);
 goScene6Btn.addEventListener("click", goScene6);
+goScene7Btn.addEventListener("click", goScene7);
 
 //Start Buttons
 startPosterBtn.addEventListener("click", startPoster);
@@ -132,67 +136,107 @@ function loopSound(src) {
     }
 }
 
-//Start Poster
-function startPoster(){
-    scene1BGsound = new sound("audio/scene1BGsound.mp3");
+
+//Start Poster / Code for Scene 1
+function startPoster() {
+    scene1BGsound = new loopSound("audio/scene1BGsound.mp3");
     scene1BGsound.play();
-
+    startPosterBtn.classList.add("hide")
+    scene1BT.classList.add("scene1run")
+    setTimeout(nxtBtnAppear1, 4500);
 }
 
-//Create Function for Scene 1 Next Button
+function nxtBtnAppear1() {
+    goScene2Btn.classList.remove("hide");
+    goScene2Btn.classList.add("appear");
+}
+
+//Create Function for Scene 1 Next Button / Code for Scene 2
 function goScene2() {
-    if (btnCount == 0) {
-        scene1.classList.add("hide");
-        scene2.classList.remove("hide");
-        scene2BGsound = new sound("audio/scene2_BGsound");
-        scene2BGsound.play();
-        btnCount++;
-        console.log(btnCount);
-    } else {
-
-    }
+    goScene2Btn.classList.add("hide")
+    scene1.classList.add("hide");
+    scene2.classList.remove("hide");
+    scene2BT.classList.add("btrun");
+    scene2SpaceShip.classList.add("spaceshipblastoff");
+    setTimeout(nxtBtnAppear2, 5500);
+    setTimeout(scene2thrust, 2500)
 }
 
-//Create Function for Scene 2 Next Button
+function nxtBtnAppear2() {
+    goScene3Btn.classList.remove("hide");
+    goScene3Btn.classList.add("appear");
+}
+
+function scene2thrust() {
+    document.querySelector("audio").volume = 0.5;
+    scene2Thrust = new sound("audio/thrust.mp3");
+    scene2Thrust.play()
+    setTimeout(stopThrust, 2500)
+}
+
+function stopThrust() {
+    scene2Thrust.stop();
+    document.querySelector("audio").volume = 1;
+}
+//Create Function for Scene 2 Next Button / Code for Scene 3
 function goScene3() {
+    document.querySelector("audio").volume = 0.5;
     scene2.classList.add("hide");
     scene3.classList.remove("hide");
 }
 
-//Create Function for Scene 3 Next Button
+//Create Function for Scene 3 Next Button / Code for Scene 4
 function goScene4() {
     scene3.classList.add("hide");
     scene4.classList.remove("hide");
     scene4BGSound = new loopSound("audio/bg_sound.mp3");
     scene4BGSound.play();
+    scene3BGsound.stop();
 }
 
-//Create Function for Scene 4 Next Button
+//Create Function for Scene 4 Next Button / Code for Scene 5
 function goScene5() {
+    phoneSound2 = new sound("audio/scene_5_telephone.mp3");
+    phoneSound2.play()
+    phoneSound1.stop();
     scene4.classList.add("hide");
     scene5.classList.remove("hide");
+    setTimeout(nxtBtnAppear5, 2000);
 }
 
-//Create Function for Scene 5 Next Button
+function nxtBtnAppear5() {
+    goScene6Btn.classList.remove("hide");
+    goScene6Btn.classList.add("appear");
+}
+
+//Create Function for Scene 5 Next Button / Code for Scene 6
 function goScene6() {
+    phoneSound2.stop();
+    phoneSound1.stop();
+    scene4BGSound.stop();
+    scene6BGsound = new loopSound("audio/scene6-7BGaudio.mp3");
+    scene6BGsound.play();
     scene5.classList.add("hide");
     scene6.classList.remove("hide");
+    setTimeout(nxtBtnAppear6, 4000);
 }
 
-//Create Function for Scene 6 Next Button
+function nxtBtnAppear6() {
+    goScene7Btn.classList.remove("hide");
+    goScene7Btn.classList.add("appear");
+}
+
+//Create Function for Scene 6 Next Button / Code for Scene 7
 function goScene7() {
     scene6.classList.add("hide");
     scene7.classList.remove("hide");
+    biker.classList.add("gobiker");
+    credits.classList.add("creditsroll");
 }
 
-//Create Function for Scene 1 Start Button
-function startPoster() {
-    scene1BGsound = new sound("audio/scene1_BGaudio.mp3");
-    scene1BGsound.play();
-
-}
 
 // SCENE 4 JS //
+
 //Click BT to show text and play BT audio and lowers BG audio
 function clickBT() {
     scene4txt.classList.remove("hide");
@@ -222,41 +266,55 @@ function clickScenetxt() {
 
 //Click dustbin adds to individual counter plus phone counter - can only be clicked once
 function clickDustbin() {
-    scene4Click++;
-    dustbin.classList.remove("glow");
-    dustbin.removeEventListener(clickDustbin)
+    if (dustbinCount == 0) {
+        dustbinCount++;
+        scene4Click++;
+        dustbin.classList.remove("glow");
+        dustbin.classList.add("fadetxt");
+    } else {}
 }
 
 //Click cupboard adds to individual counter plus phone counter - can only be clicked once
 function clickCupboard() {
-    scene4Click++;
-    cupboard.classList.remove("glow");
-    cupboard.removeEventListener(clickCupboard)
+    if (cupboardCount == 0) {
+        cupboardCount++;
+        scene4Click++;
+        cupboard.classList.remove("glow");
+        cupboard.classList.add("fadetxt");
+    } else {}
 }
 
 //Click stone adds to individual counter plus phone counter - can only be clicked once
 function clickStone() {
-    scene4Click++;
-    stone.classList.remove("glow");
-    stone.removeEventListener(clickStone)
+    if (stoneCount == 0) {
+        stoneCount++;
+        scene4Click++;
+        stone.classList.remove("glow");
+        stone.classList.add("fadetxt");
+    } else {}
 }
 
 //Phone rings when counter is at 3
 var phoneCheck = setInterval(function () {
     if (scene4Click >= 3) {
         document.querySelector("audio").volume = 0.3;
-        phoneSound = new loopSound("audio/scene_5_telephone.mp3")
-        phoneSound.play();
+        phoneSound1 = new loopSound("audio/scene_5_telephone.mp3");
+        phoneSound1.play();
+        goScene5Btn.classList.remove("hide");
+        goScene5Btn.classList.add("appear");
         clearInterval(phoneCheck);
     } else {
 
     }
 }, 1000)
 
-// SCENE 3 JS
+
+// SCENE 3 JS //
 
 //Functions that Initiate all Game Components
 function startGame() {
+    scene1BGsound.stop();
+    startBtn.classList.add("hide")
     //    Create Canvas
     myGameArea.start();
     //    Create Spaceship
@@ -621,22 +679,29 @@ function updateGameArea() {
     } else {
         mySpaceShip.image.src = "images/spaceship.png"
         mySpaceShip.width = 50;
-        myThrust.stop()
+        scene3Thrust.stop()
     }
+
     if (myGameArea.frameNo == 1500) {
         endPage.classList.remove("hide");
         const canvas = document.querySelector("canvas")
         canvas.classList.add("hide")
-        mySound.stop();
-
+        document.querySelector("audio").volume = 0.5;
+        myGameArea.stop();
+        goScene4Btn.classList.remove("hide");
+        goScene4Btn.classList.add("appear");
     }
 
     if (myRestart >= 1) {
-        scene3crashSound = new sound("audio/crash.mp3")
-        scene3crashSound.play();
-        scene3BGsound.stop();
-        scene3Thrust.stop();
-        restartBtn.classList.remove("hide")
+        if (myGameArea.frameNo >= 1500) {
+
+        } else {
+            scene3crashSound = new sound("audio/crash.mp3")
+            scene3crashSound.play();
+            scene3BGsound.stop();
+            scene3Thrust.stop();
+            restartBtn.classList.remove("hide")
+        }
     }
 }
 
