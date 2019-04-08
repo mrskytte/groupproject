@@ -1,0 +1,76 @@
+@font-face {
+    font-family: "pokemon";
+    src: url(pokemon.ttf);
+}
+
+#scene7 {
+    background-image: url(dustbin_scene7_BG.png);
+    background-size: contain;
+    position: absolute;
+    width: 960px;
+    height: 771px;
+    overflow: hidden;
+}
+
+.creditstyle {
+    color: black;
+    font-family: "pokemon";
+    font-size: 36px;
+    text-align: center;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 480px;
+    height: 384px;
+}
+
+.creditsroll {
+    animation: creditroll 15s linear forwards;
+}
+
+@keyframes creditroll {
+    0% {
+        transform: translateY(100vh);
+        display: block;
+    }
+
+    to {
+        transform: translateY(-910px);
+    }
+}
+
+#biker {
+    animation: biking 15s linear forwards;
+}
+
+@keyframes biking {
+    0% {
+        opacity: 1;
+        transform: translateY(80px) translateX(0px) rotate(5deg);
+    }
+
+    25 % {
+        opacity: 1;
+        transform: translateY(75px) translateX(197.5px) rotate(10deg);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translateY(70px) translateX(395px) rotate(15deg);
+    }
+
+    75% {
+        opacity: 1;
+        transform: translateY(75px) translateX(592.5px) rotate(20deg);
+    }
+
+    98% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(80px) translateX(790px) rotate(25deg);
+
+    }

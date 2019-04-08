@@ -1,0 +1,32 @@
+#scene5 {
+    background-image: url(dustbin_scene5_BGandtext.png);
+    background-size: contain;
+    position: absolute;
+    width: 960px;
+    height: 768px;
+}
+
+#ring{
+    position: relative;
+    margin-left: 5px;
+    margin-top: 440px;
+}
+#phoneposition{
+    position: relative;
+    margin-left: 260px;
+    margin-top: 270px;
+    
+}
+#phone {
+    position: absolute;
+    width: 500px;
+    height: 300px;
+    background-image: url(sprite05.png);
+    animation: spriteAnimation 3s steps(7) alternate infinite;
+
+}
+@keyframes spriteAnimation {
+    to {
+        background-position: -3500px;
+    }
+}

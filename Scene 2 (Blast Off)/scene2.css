@@ -1,0 +1,47 @@
+#scene2 {
+    background-image: url(dustbin_scene2_BGandtext.png);
+    background-size: contain;
+    width: 960px;
+    height: 768px;
+    overflow: hidden;
+}
+
+#btrun {
+    animation: run 2s linear forwards;
+}
+
+@keyframes run {
+    0% {
+        transform: translateY(215px) translateX(-700px);
+    }
+
+    90% {
+        opacity: 1
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(215px) translateX(95px)
+    }
+}
+
+#spaceship {
+    animation: blastoff 5s ease-in forwards;
+}
+
+@keyframes blastoff {
+    0% {
+        transform: translateY(215px) translateX(450px);
+    }
+
+    50% {
+        transform: translateY(215px) translateX(450px);
+    }
+
+    95% {
+        transform: translateY(-200px) translatex(450px) rotate(5deg)
+    }
+
+    100% {
+        transform: translateY(-600px) translateX(600px) rotate(15deg)
+    }

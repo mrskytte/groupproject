@@ -1,0 +1,24 @@
+canvas {
+    border: 1px solid black;
+    background-color: black;
+}
+
+button {
+    cursor: pointer;
+}
+
+
+.emptypage {
+    width: 960px;
+    height: 768px;
+    background: black;
+    text-align: center;
+}
+
+#startBtn, #endBtn {
+    margin-top: 250px;
+}
+
+.hide {
+    display: none;
+}

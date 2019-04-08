@@ -1,0 +1,21 @@
+@font-face {
+    font-family: "pokemon";
+    src: url(pokemon.ttf);
+}
+
+#scene6 {
+    background-image: url(dustbin_scene6A.png);
+    background-size: contain;
+    width: 960;
+    height: 768;
+    text-align: justify; 
+    animation: bgtoggle 1.5s infinite 
+}
+
+@keyframes bgtoggle {50%{background-image: url(dustbin_scene6B.png)}}
+
+
+
+
+
+

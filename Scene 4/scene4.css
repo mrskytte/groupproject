@@ -1,0 +1,99 @@
+/*SCENE 4*/
+#scene4 {
+    width: 960px;
+    height: 771px;
+    cursor: url(images/dustbin_finger.png);
+}
+
+
+#cupboard {
+    height: 165px;
+    position: absolute;
+    top: 590px;
+    left: 373px
+}
+
+#stone {
+    height: 195px;
+    position: absolute;
+    top: 580px;
+    left: 800px;
+
+}
+
+#dustbin {
+    height: 178px;
+    position: absolute;
+    top: 593px;
+    left: 65px;
+}
+
+#scene4txt {
+    position: absolute;
+    top: 200px;
+    left: 150px;
+}
+
+#scene4BT {
+    height: 260px;
+    position: absolute;
+    top: 510px;
+    left: 450px;
+}
+
+.glow {
+    -webkit-filter: drop-shadow(0px 0px 80px rgba(255, 238, 1, 0.8));
+}
+
+.fadetxt {
+    animation: fadetxt 1s forwards;
+}
+
+@keyframes fadetxt{
+    0%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
+}
+
+.fadeBT {
+    animation: fadeBT 2s forwards;
+}
+
+@keyframes fadeBT{
+    0%{
+        transform: translateX(0px);
+    }
+    50%{
+        opacity: 1;
+    }
+    100%{
+        transform: translateX(200px);
+        opacity: 0;
+    }
+}
+
+.nextbtn{
+    position: absolute;
+    top: 350px;
+    left: 1000px;
+}
+
+.hide {
+    display: none;
+}
+
+.appear {
+    animation: appear 1s forwards;
+}
+
+@keyframes appear {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
