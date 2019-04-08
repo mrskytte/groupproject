@@ -21,7 +21,7 @@
     height: 768px;
 }
 
-#bt {
+#scene1bt {
     background-position: 768px;
     position: absolute;
     width: 96px;
@@ -123,7 +123,7 @@
 /* Scene 2 (Blast Off) */
 
 #scene2 {
-    background-image: url(image/dustbin_scene2_BGandtext.png);
+    background-image: url(images/dustbin_scene2_BGandtext.png);
     background-size: contain;
     width: 960px;
     height: 768px;
@@ -172,6 +172,7 @@
 }
 
 
+
 /* Scene 3 (Game) */
 
 canvas {
@@ -188,7 +189,15 @@ canvas {
 
 #startBtn,
 #endBtn {
-    margin-top: 250px;
+    margin-top: 150px;
+}
+
+.gamebtn {
+    -webkit-filter: drop-shadow(0px 0px 80px rgba(255, 238, 1, 0.8));
+    position: absolute;
+    top: 450px;
+    left: 350px;
+    cursor: pointer;
 }
 
 
@@ -268,13 +277,6 @@ canvas {
     }
 }
 
-.nextbtn {
-    position: absolute;
-    top: 350px;
-    left: 1000px;
-}
-
-
 .appear {
     animation: appear 1s forwards;
 }
@@ -300,17 +302,10 @@ canvas {
     height: 768px;
 }
 
-#ring {
-    position: relative;
-    margin-left: 5px;
-    margin-top: 440px;
-}
-
 #phoneposition {
     position: relative;
     margin-left: 260px;
     margin-top: 270px;
-
 }
 
 #phone {
@@ -344,6 +339,7 @@ canvas {
         background-image: url(images/dustbin_scene6B.png)
     }
 }
+
 
 
 /* Scene 7 (Credits)*/
@@ -419,4 +415,14 @@ canvas {
         transform: translateY(80px) translateX(790px) rotate(25deg);
 
     }
+}
+
+
+.nxtbtn,
+.startbtn {
+    -webkit-filter: drop-shadow(0px 0px 80px rgba(255, 238, 1, 0.8));
+    position: absolute;
+    top: 350px;
+    left: 350px;
+    cursor: pointer;
 }
