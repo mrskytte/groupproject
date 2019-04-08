@@ -1,278 +1,21 @@
-//Define elements
 const startBtn = document.querySelector("#startgame")
 startBtn.addEventListener("click", startGame)
 
 const startPage = document.querySelector("#startpage")
 const endPage = document.querySelector("#endpage")
 const main = document.querySelector("#main");
-
-
-
-
-//Scenes
-const scene1 = document.querySelector("#scene1");
-const scene2 = document.querySelector("#scene2");
-const scene3 = document.querySelector("#scene3");
-const scene4 = document.querySelector("#scene4");
-const scene5 = document.querySelector("#scene5");
-const scene6 = document.querySelector("#scene6");
-const scene7 = document.querySelector("#scene7");
-
-//Buttons
-
-    //Next Buttons
-const goScene2Btn = document.querySelector("#goscene2");
-const goScene3Btn = document.querySelector("#goscene3");
-const goScene4Btn = document.querySelector("#goscene4");
-const goScene5Btn = document.querySelector("#goscene5");
-const goScene6Btn = document.querySelector("#goscene6");
-
-    //Start Button
-const startPosterBtn = document.querySelector("#startposter");
-
-    //Restart Button
 const restartBtn = document.querySelector("#restart")
 
-//Variable
-
-    //Elements
 var mySpaceShip;
 var myAstroid = [];
 var myDistance;
-
-    //Sounds
-var scene1BGsound;
-var scene2BGsound;
-var scene2Thrust;
-var scene3BGsound;
-var scene3Thrust;
-var scene3crashSound;
-var scene5Phone;
-var scene6BGsound;
-var scene7BGsound;
-
-    //Counters
-var btnCount = 0;
 var myRestart = 0;
+var BGsound;
+var myThrust;
+var crashSound;
 
-//Add Event Listeners to Buttons
-
-    //Next Buttons
-goScene2Btn.addEventListener("click", goScene2);
-goScene3Btn.addEventListener("click", goScene3);
-goScene4Btn.addEventListener("click", goScene4);
-goScene5Btn.addEventListener("click", goScene5);
-goScene6Btn.addEventListener("click", goScene6);
-
-    //Start Button
-startPosterBtn.addEventListener("click", startPoster);
-
-//    Restart Button
 restartBtn.addEventListener("click", restartGame)
 
-//Audio functions
-
- //Single Playthrough
-function sound(src) {
-    this.sound = document.createElement("audio");
-    this.sound.src = src;
-    this.sound.setAttribute("preload", "auto");
-    this.sound.setAttribute("controls", "none");
-    this.sound.style.display = "none";
-    document.body.appendChild(this.sound);
-    this.play = function () {
-        this.sound.play();
-    }
-    this.stop = function () {
-        this.sound.pause();
-    }
-}
-
- //Infinite Loop
-function loopSound(src) {
-    this.sound = document.createElement("audio");
-    this.sound.src = src;
-    this.sound.setAttribute("preload", "auto");
-    this.sound.setAttribute("controls", "none");
-    this.sound.setAttribute("loop", "true")
-    this.sound.style.display = "none";
-    document.body.appendChild(this.sound);
-    this.play = function () {
-        this.sound.play();
-    }
-    this.stop = function () {
-        this.sound.pause();
-    }
-}
-
-//Create Function for Scene 1 Next Button
-function goScene2() {
-    if (btnCount == 0){
-    scene1.classList.add("hide");
-    scene2.classList.remove("hide");
-    scene2BGsound = new sound("audio/scene2_BGsound");
-    scene2BGsound.play();
-        btnCount++;
-        console.log(btnCount);
-    } else {
-
-    }
-}
-
-//Create Function for Scene 2 Next Button
-function goScene3() {
-    scene2.classList.add("hide");
-    scene3.classList.remove("hide");
-}
-
-//Create Function for Scene 3 Next Button
-function goScene4() {
-    scene3.classList.add("hide");
-    scene4.classList.remove("hide");
-}
-
-//Create Function for Scene 4 Next Button
-function goScene5() {
-    scene4.classList.add("hide");
-    scene5.classList.remove("hide");
-}
-
-//Create Function for Scene 5 Next Button
-function goScene6() {
-    scene5.classList.add("hide");
-    scene6.classList.remove("hide");
-}
-
-//Create Function for Scene 6 Next Button
-function goScene7() {
-    scene6.classList.add("hide");
-    scene7.classList.remove("hide");
-}
-
-//Create Function for Scene 1 Start Button
-function startPoster() {
-    scene1BGsound = new sound("audio/scene1_BGaudio.mp3");
-    scene1BGsound.play();
-
-}
-
-// SCENE 4 JS //
-//Define elements
-const cupboard = document.querySelector("#cupboard")
-const stone = document.querySelector("#stone")
-const dustbin = document.querySelector("#dustbin")
-const scene4txt = document.querySelector("#scene4txt")
-const scene4BT = document.querySelector("#scene4BT")
-const goScene5 = document.querySelector("#goscene5")
-var phoneSound;
-var BTsound;
-var scene4BGSound;
-
-//Add key listeners
-scene4txt.addEventListener("click", clickScenetxt)
-scene4BT.addEventListener("click", clickBT)
-//window.addEventListener("click", startSound)
-//goScene5.addEventListener("click", clickNextBtn)
-
-//Add BG audio function
-
-
-//Add audio function
-function sound(src) {
-    this.sound = document.createElement("audio");
-    this.sound.src = src;
-    this.sound.setAttribute("preload", "auto");
-    this.sound.setAttribute("controls", "none");
-    this.sound.style.display = "none";
-    document.body.appendChild(this.sound);
-    this.play = function () {
-        this.sound.play();
-    }
-    this.stop = function () {
-        this.sound.pause();
-    }
-}
-
-//Add counter for phone to ring
-var globalClick = 0;
-
-//Background Audio
-function startSound() {
-    scene4BGSound = new loopSound("audio/bg_sound.mp3");
-    scene4BGSound.play();
-    window.removeEventListener("click", startSound)
-}
-
-//Click BT to show text and play BT audio and lowers BG audio
-function clickBT() {
-    scene4txt.classList.remove("hide");
-    document.querySelector("audio").volume = 0.4;
-    BTsound = new sound("audio/bt_voice.mp3");
-    BTsound.play()
-    scene4BT.removeEventListener("click", clickBT);
-    scene4BT.classList.remove("glow");
-    scene4txt.classList.add("glow");
-}
-
-//Click text to hide text and BT plus play ambient audio - plus initiate clickability of other objects
-function clickScenetxt() {
-    BTsound.stop()
-    document.querySelector("audio").volume = 1;
-    scene4txt.classList.add("fadetxt");
-    scene4BT.classList.add("fadeBT");
-    dustbin.classList.add("glow")
-    stone.classList.add("glow")
-    cupboard.classList.add("glow")
-    cupboard.addEventListener("click", clickCupboard)
-    stone.addEventListener("click", clickStone)
-    dustbin.addEventListener("click", clickDustbin)
-    scene4txt.removeEventListener("click", clickScenetxt)
-
-}
-
-//Click dustbin adds to individual counter plus phone counter - can only be clicked once
-function clickDustbin() {
-        globalClick++;
-        dustbin.classList.remove("glow");
-}
-
-
-//Click cupboard adds to individual counter plus phone counter - can only be clicked once
-function clickCupboard() {
-        globalClick++;
-        cupboard.classList.remove("glow");
-}
-
-//Click stone adds to individual counter plus phone counter - can only be clicked once
-function clickStone() {
-        globalClick++;
-        stone.classList.remove("glow");
-}
-
-//Phone rings when counter is at 3
-var phoneCheck = setInterval(function () {
-    if (globalClick >= 3) {
-        document.querySelector("audio").volume = 0.3;
-        phoneSound = new loopSound("audio/scene_5_telephone.mp3")
-        phoneSound.play();
-        clearInterval(phoneCheck);
-        goToScene5();
-    } else {
-
-    }
-}, 1000)
-
-
-//Next button appears
-function goToScene5() {
-    goScene5.classList.add("appear")
-    goScene5.classList.remove("hide")
-}
-
-
-// GAME JS
-
-//Functions that Initiate all Game Components
 function startGame() {
     //    Create Canvas
     myGameArea.start();
@@ -281,10 +24,26 @@ function startGame() {
     //    Distance Traveled (Score)
     myDistance = new component("25px", "Consolas", "white", 1280 * 0.55, 40, "text")
     // Audio
-    scene3BGsound = new sound("audio/BGaudio.mp3")
-    scene3BGsound.play();
-    scene3Thrust = new sound("audio/thrust.mp3")
+    BGsound = new sound("audio/BGaudio.mp3")
+    BGsound.play();
+    myThrust = new sound("audio/thrust.mp3")
     startPage.classList.add("hide")
+}
+
+// Adds audio
+function sound(src) {
+    this.sound = document.createElement("audio");
+    this.sound.src = src;
+    this.sound.setAttribute("preload", "auto");
+    this.sound.setAttribute("controls", "none");
+    this.sound.style.display = "none";
+    document.body.appendChild(this.sound);
+    this.play = function () {
+        this.sound.play();
+    }
+    this.stop = function () {
+        this.sound.pause();
+    }
 }
 
 //Create Canvas Function
@@ -345,6 +104,12 @@ function component(width, height, color, x, y, type) {
         } else {
             ctx.fillStyle = color;
             ctx.fillRect(this.x, this.y, this.width, this.height);
+            //            ctx.save();
+            //            ctx.translate(this.x, this.y);
+            //            ctx.rotate(this.angle);
+            //            ctx.fillStyle = color;
+            //            ctx.fillRect(this.width / -2, this.height / -2, this.width, this.height);
+            //            ctx.restore();
         }
     }
     this.newPos = function () {
@@ -386,6 +151,12 @@ function component(width, height, color, x, y, type) {
     }
 }
 
+//end of game function
+//function win() {
+//    console.log("win win")
+//    endPage.classList.remove("hide");
+
+//}
 //Makes the Game Run (by deleting and adding frames)
 function updateGameArea() {
     var x, y;
@@ -633,7 +404,7 @@ function updateGameArea() {
         mySpaceShip.image.src = "images/spaceshipFlame.png";
         mySpaceShip.width = 87;
         mySpaceShip.speedX += (2 + mySpaceShip.gravity);
-        scene3Thrust.play();
+        myThrust.play();
 
     } else {
         mySpaceShip.image.src = "images/spaceship.png"
@@ -649,10 +420,10 @@ function updateGameArea() {
     }
 
     if (myRestart >= 1) {
-        scene3crashSound = new sound("audio/crash.mp3")
-        scene3crashSound.play();
-        scene3BGsound.stop();
-        scene3Thrust.stop();
+        crashSound = new sound("audio/crash.mp3")
+        crashSound.play();
+        BGsound.stop();
+        myThrust.stop();
         restartBtn.classList.remove("hide")
     }
 }
@@ -668,5 +439,3 @@ function restartGame() {
     document.location.reload();
     clearInterval(interval);
 }
-
-
