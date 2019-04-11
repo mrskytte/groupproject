@@ -1,14 +1,23 @@
 /* Fonts */
-div{
+* {
+    font-family: "pokemon";
+}
+body {
+    background-image: radial-gradient(#010b19, #021631);
+}
+
+p {
+    margin: 40px;
+    line-height: 30px;
+}
+
+div {
     cursor: url(images/dustbin_finger.png), auto;
 }
+
 @font-face {
     font-family: "pokemon";
     src: url(font/pokemon.ttf);
-}
-
-.hide {
-    display: none;
 }
 
 .glow {
@@ -16,6 +25,15 @@ div{
 }
 
 /* Scene 1 (Running Across Screen) */
+
+#textscene1 {
+    background-image: url(images/text_content.png);
+    height: 240px;
+    width: 790px;
+    position: absolute;
+    top: 25px;
+    left: 20px;
+}
 
 #scene1 {
     background-image: url(images/dustbin_scene1_BG.png);
@@ -33,7 +51,7 @@ div{
 }
 
 .scene1run {
-    animation: run 7s linear alternate;
+    animation: run 4s linear alternate;
 }
 
 #fg {
@@ -49,74 +67,58 @@ div{
     }
 
     5% {
-        transform: translate(0vw, 10px);
+        transform: translate(0px, 10px);
     }
 
     10% {
-        transform: translate(5vw, 0);
+        transform: translate(80px, 0);
     }
 
     15% {
-        transform: translate(10vw, 10px);
+        transform: translate(160px, 10px);
     }
 
     20% {
-        transform: translate(15vw, 0);
+        transform: translate(240px, 0);
     }
 
     25% {
-        transform: translate(20vw, 10px);
+        transform: translate(320px, 10px);
     }
 
     30% {
-        transform: translate(25vw, 0);
+        transform: translate(400px, 0);
     }
 
     35% {
-        transform: translate(30vw, 10px);
+        transform: translate(480px, 10px);
     }
 
     40% {
-        transform: translate(35vw, 0);
+        transform: translate(560px, 0);
     }
 
     45% {
-        transform: translate(40vw, 10px);
+        transform: translate(640px, 10px);
     }
 
     50% {
-        transform: translate(45vw, 0);
+        transform: translate(720px, 0);
     }
 
     55% {
-        transform: translate(50vw, 10px);
+        transform: translate(800px, 10px);
         opacity: 1;
     }
 
     57% {
-        transform: translate(50vw, 10px);
-        opacity: 0.5;
-    }
-
-    58% {
-        transform: translate(50vw, 10px);
-        opacity: 0;
-    }
-
-
-    60% {
-        transform: translate(55vw, 0);
-        opacity: 0;
-    }
-
-    65% {
-        transform: translate(55vw, 0);
+        transform: translate(920px, 10px);
         opacity: 0;
     }
 
 
     100% {
-        transform: translate(100vw, 10px);
+        transform: translate(960px 10px);
         opacity: 0;
     }
 
@@ -126,11 +128,25 @@ div{
 /* Scene 2 (Blast Off) */
 
 #scene2 {
-    background-image: url(images/dustbin_scene2_BGandtext.png);
+    background-image: url(images/dustbin_scene2_BG.png);
     background-size: contain;
     width: 960px;
     height: 768px;
     overflow: hidden;
+}
+
+#textscene2 {
+    background-image: url(images/text_content.png);
+    background-size: 100% 100%;
+    height: 180px;
+    width: 590px;
+    position: absolute;
+    top: 25px;
+    left: 20px;
+}
+
+#scene2BT {
+    transform: translateY(215px) translateX(-700px);
 }
 
 .btrun {
@@ -151,6 +167,11 @@ div{
         transform: translateY(215px) translateX(95px)
     }
 }
+
+#scene2spaceship {
+    transform: translateY(215px) translateX(450px);
+}
+
 
 .spaceshipblastoff {
     animation: blastoff 5s ease-in forwards;
@@ -187,12 +208,31 @@ canvas {
     width: 960px;
     height: 768px;
     background: black;
-    text-align: center;
 }
 
 #startBtn,
 #endBtn {
-    margin-top: 150px;
+    background-image: url(images/text_content.png);
+    background-size: 100% 100%;
+    width: 790px;
+    height: 240px;
+    position: absolute;
+    top: 150px;
+    left: 85px;
+    font-size: 1.5rem;
+}
+
+#controlbox {
+    width: 790px;
+    height: 240px;
+    position: absolute;
+    top: 200px;
+    left: 85px;
+}
+
+#text4 {
+    margin: 40px;
+    line-height: 30px;
 }
 
 .gamebtn {
@@ -200,7 +240,7 @@ canvas {
     position: absolute;
     top: 450px;
     left: 350px;
-    cursor: pointer;
+    cursor: url(images/dustbin_finger_glow.png), auto;
 }
 
 
@@ -219,12 +259,61 @@ canvas {
     left: 373px
 }
 
+.cupboardshake{
+    animation: shakecupboard 2s infinite;
+}
+
+@keyframes shakecupboard {
+    0% {
+        transform: rotate(0deg);
+    }
+    40% {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(-7deg);
+    }
+    60% {
+        transform: rotate(7deg);
+    }
+    70% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
 #stone {
     height: 195px;
     position: absolute;
     top: 580px;
     left: 800px;
+}
 
+.stoneshake{
+    animation: shakestone 4s infinite;
+}
+
+@keyframes shakestone {
+    0% {
+        transform: rotate(0deg);
+    }
+    45% {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(7deg);
+    }
+    55% {
+        transform: rotate(-7deg);
+    }
+    60% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
 }
 
 #dustbin {
@@ -234,7 +323,36 @@ canvas {
     left: 65px;
 }
 
+.dustbinshake{
+    animation: shakedustbin 5s infinite;
+}
+
+@keyframes shakedustbin {
+    0% {
+        transform: rotate(0deg);
+    }
+    47% {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(7deg);
+    }
+    53% {
+        transform: rotate(-7deg);
+    }
+    56% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
 #scene4txt {
+    background-image: url(images/text_content_speech.png);
+    background-size: 100% 100%;
+    width: 790px;
+    height: 320px;
     position: absolute;
     top: 200px;
     left: 150px;
@@ -247,6 +365,9 @@ canvas {
     left: 450px;
 }
 
+.text4{
+    font-size: 1.4rem;
+}
 .fadetxt {
     animation: fadetxt 1s forwards;
 }
@@ -422,10 +543,26 @@ canvas {
 
 
 .nxtbtn,
-.startbtn {
+.startbtn,
+#restart {
     cursor: url(images/dustbin_finger_glow.png), auto;
     -webkit-filter: drop-shadow(0px 0px 80px rgba(255, 238, 1, 0.8));
     position: absolute;
     top: 350px;
     left: 350px;
+}
+
+.hide {
+    display: none;
+}
+
+#tv{
+    position: absolute;
+    left: -27px;
+    top: -10px;
+    z-index: -10;
+    background-image: url(images/dustbin_BGTV.png);
+    width: 1298px;
+    height: 814px;
+    
 }
